@@ -1,7 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NostalgiaTrek;
 using System;
 
-namespace CustomUnitTests
+namespace NostaligaTrekTests
 {
     [TestClass]
     public class ShieldTests
@@ -9,9 +10,9 @@ namespace CustomUnitTests
         [TestMethod]
         public void ShieldsAreUpByDefault()
         {
-            //var shield = new Shield();
+            var shield = new Shield();
 
-            //Assert.IsTrue(shield.IsUp());
+            Assert.IsTrue(shield.IsUp());
         }
     }
 }

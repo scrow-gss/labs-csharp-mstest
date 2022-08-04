@@ -59,9 +59,9 @@
       <Project>{D3BAF628-8D76-4665-88C6-EC0A18F9EAF2}</Project>
       <Name>StarTrekWebGadgets</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StarTrek\StarTrek.csproj">
+    <ProjectReference Include="..\StarTrek\StarTrekOriginal.csproj">
       <Project>{644AB580-E1E7-4E0B-A925-E36F18EFB2BB}</Project>
-      <Name>StarTrek</Name>
+      <Name>StarTrekOriginal</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
