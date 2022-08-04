@@ -7,37 +7,50 @@ namespace NostalgiaTrek
 {
     public class Shields
     {
-        private bool isRaised;
+        private const int MAXENERGY = 10000;
+        private const int MINIMUMENERGY = 0;
+        private const int STARTINGENERGY = 8000;
+        
+        public bool IsRaised { get; private set; }
 
         public Shields()
         {
-            isRaised = true;
-        }
-
-        public bool IsRaised()
-        {
-            return isRaised;
+            IsRaised = false;
+            EnergyLevel = STARTINGENERGY;
         }
 
         public void Lower()
         {
-            isRaised = false;
+            IsRaised = false;
         }
 
         public void Raise()
         {
-            isRaised = true;
+            IsRaised = true;
         }
 
-        private int _energy { get; set; }
-        public object EnergyLevel()
+        public int EnergyLevel { get; private set; }
+
+        public void ChargeShield(int chargeAmount)
         {
-            return _energy;
+            EnergyLevel += chargeAmount;
+
+            if (EnergyLevel > MAXENERGY)
+                EnergyLevel = MAXENERGY;
         }
 
-        public int AddEnergy(int shieldEnergy)
+        public void ReduceShield(int reductionAmount)
         {
-            throw new NotImplementedException();
+            if (!IsRaised)
+                return;
+
+            EnergyLevel -= reductionAmount;
+
+            if (EnergyLevel < MINIMUMENERGY)
+            {
+                EnergyLevel = MINIMUMENERGY;
+                this.Lower();
+            }
         }
     }
 }
