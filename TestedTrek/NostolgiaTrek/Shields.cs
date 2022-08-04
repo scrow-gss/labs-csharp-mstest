@@ -28,5 +28,16 @@ namespace NostalgiaTrek
         {
             isRaised = true;
         }
+
+        private int _energy { get; set; }
+        public object EnergyLevel()
+        {
+            return _energy;
+        }
+
+        public int AddEnergy(int shieldEnergy)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

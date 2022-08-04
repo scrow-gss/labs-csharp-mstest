@@ -36,5 +36,12 @@ namespace NostaligaTrekTests
             Assert.IsTrue(shield.IsRaised());
         }
 
+        [TestMethod]
+        public void CheckEnergy()
+        {
+            var shield = new Shields();
+
+            Assert.AreEqual(0, shield.EnergyLevel());
+        }
     }
 }
