@@ -9,7 +9,7 @@ namespace NostalgiaTrek
     {
         public bool IsUp()
         {
-            return false;
+            return true;
         }
     }
 }
