@@ -8,11 +8,22 @@ namespace NostaligaTrekTests
     public class ShieldTests
     {
         [TestMethod]
-        public void ShieldsAreUpByDefault()
+        public void ShieldsAreRaisedByDefault()
         {
             var shield = new Shields();
 
             Assert.IsTrue(shield.IsUp());
         }
+        
+        [TestMethod]
+        public void ShieldsCanBeLowered()
+        {
+            var shield = new Shields();
+            
+            shield.Lower();
+
+            Assert.IsFalse(shield.IsUp());
+        }
+
     }
 }
