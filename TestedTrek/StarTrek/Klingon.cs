@@ -25,5 +25,6 @@ public class Klingon {
 
 	public virtual void Delete() {
 	}
+    
 
 }

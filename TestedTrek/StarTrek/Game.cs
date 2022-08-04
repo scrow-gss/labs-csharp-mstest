@@ -1,88 +1,167 @@
 ﻿using System;
 using System.Collections.Generic;
 using Untouchables;
+using StarTrek;
 
 public class Game {
+    public static RandomGenerator random = new RandomGenerator();
 
-	private int e = 10000;
-	private int t = 8;
+	private int _energy = 10000;
+    private Phaser phaser = new Phaser(random);
+    private static Random _generator;
+    public static Random generator
+    {
+        set
+        {
 
-    public int EnergyRemaining() {
-        return e;
+            _generator = value;
+            random.setRandom(_generator);
+        }
+        get
+        {
+            return _generator;
+        }
     }
 
+    public int GetEnergyRemaining() {
+        
+        return _energy;
+    }
+
+    private int _torpedos = 8;
     public int Torpedoes {
         set {
-            t = value;
+            _torpedos = value;
         }
         get {
-            return t;
+            return _torpedos;
         }
     }
 
-    public void FireWeapon(WebGadget wg) {
-        FireWeapon(new Galaxy(wg));
+    public void FireWeapon(WebGadget webgadget) {
+        FireWeapon(new Galaxy(webgadget));
     }
 
-    public void FireWeapon(Galaxy wg) {
-        if (wg.Parameter("command").Equals("phaser")) {
-			int amount = int.Parse(wg.Parameter("amount"));
-			Klingon enemy = (Klingon) wg.Variable("target");
-			if (e >= amount) {
-				int distance = enemy.Distance();
-				if (distance > 4000) {
-					wg.WriteLine("Klingon out of range of phasers at " + distance + " sectors...");
-				} else {
-					int damage = amount - (((amount /20)* distance /200) + Rnd(200));
-					if (damage < 1)
-						damage = 1;
-					wg.WriteLine("Phasers hit Klingon at " + distance + " sectors with " + damage + " units");
-					if (damage < enemy.GetEnergy()) {
-						enemy.SetEnergy(enemy.GetEnergy() - damage);
-						wg.WriteLine("Klingon has " + enemy.GetEnergy() + " remaining");
-					} else {
-						wg.WriteLine("Klingon destroyed!");
-						enemy.Delete();
-					}
-				}
-				e -= amount;
+    public void FireWeapon(Galaxy galaxy) {
+        if (galaxy.Parameter("command").Equals("phaser"))
+        {
+            RunPhaserCommand(galaxy);
 
-			} else {
-				wg.WriteLine("Insufficient energy to fire phasers!");
-			}
+        }
+        else if (galaxy.Parameter("command").Equals("photon"))
+        {
+            RunPhotonCommand(galaxy);
+        }
+    }
 
-		} else if (wg.Parameter("command").Equals("photon")) {
-			Klingon enemy = (Klingon) wg.Variable("target");
-			if (t  > 0) {
-				int distance = enemy.Distance();
-				if ((Rnd(4) + ((distance / 500) + 1) > 7)) {
-					wg.WriteLine("Torpedo missed Klingon at " + distance + " sectors...");
-				} else {
-					int damage = 800 + Rnd(50);
-					wg.WriteLine("Photons hit Klingon at " + distance + " sectors with " + damage + " units");
-					if (damage < enemy.GetEnergy()) {
-						enemy.SetEnergy(enemy.GetEnergy() - damage);
-						wg.WriteLine("Klingon has " + enemy.GetEnergy() + " remaining");
-					} else {
-						wg.WriteLine("Klingon destroyed!");
-						enemy.Delete();
-					}
-				}
-				t -= 1;
+    private void RunPhotonCommand(Galaxy galaxy)
+    {
+        
+        if (_torpedos > 0)
+        {
+            Klingon enemy = (Klingon)galaxy.Variable("target");
+            int distance = enemy.Distance();
 
-			} else {
-				wg.WriteLine("No more photon torpedoes!");
-			}
-		}
-	}
+            FirePhoton(galaxy, enemy, distance);
+        }
+        else
+        {
+            galaxy.WriteLine("No more photon torpedoes!");
+        }
+    }
+
+    private void FirePhoton(Galaxy galaxy, Klingon enemy, int distance)
+    {
+        if (DoesTropedoHit(distance))
+        {
+            TorpedoHit(galaxy, enemy, distance);            
+        }
+        else
+        {
+            galaxy.WriteLine("Torpedo missed Klingon at " + distance + " sectors...");
+        }
+        _torpedos -= 1;
+    }
+
+    private  bool DoesTropedoHit(int distance)
+    {
+        return (random.Rnd(4) + ((distance / 500) + 1) < 7);
+    }
+
+    private  void TorpedoHit(Galaxy galaxy, Klingon enemy, int distance)
+    {
+        TakeDamage(galaxy, enemy, distance);
+    }
+
+    private  void TakeDamage(Galaxy galaxy, Klingon enemy, int distance)
+    {
+        int damage = GetPhotonDamage();
+        galaxy.WriteLine("Photons hit Klingon at " + distance + " sectors with " + damage + " units");
+        DamageEnemy(galaxy, enemy, damage);
+    }
+
+    private static void DamageEnemy(Galaxy galaxy, Klingon enemy, int damage)
+
+    {
+
+        if (damage < enemy.GetEnergy())
+        {
+            enemy.SetEnergy(enemy.GetEnergy() - damage);
+            galaxy.WriteLine("Klingon has " + enemy.GetEnergy() + " remaining");
+        }
+        else
+        {
+            galaxy.WriteLine("Klingon destroyed!");
+            enemy.Delete();
+        }
+        
+
+    }
+
+    private  int GetPhotonDamage()
+    {
+        return 800 + random.Rnd(50);
+    }
+
+    private void RunPhaserCommand(Galaxy galaxy)
+    {
+        int energyCost = int.Parse(galaxy.Parameter("amount"));
+        
+        if (_energy >= energyCost)
+        {
+            FirePhaser(galaxy, energyCost);
+
+        }
+        else
+        {
+            galaxy.WriteLine("Insufficient energy to fire phasers!");
+        }
+    }
+
+    private void FirePhaser(Galaxy galaxy, int energyCost)
+    {
+        Klingon enemy = (Klingon)galaxy.Variable("target");
+        int distance = enemy.Distance();
+        if (phaser.IsWithinPhaserRange(distance))
+        {
+            phaser.HitEnemyWithPhaser(galaxy, energyCost, enemy, distance);
+        }
+        else
+        {
+            galaxy.WriteLine("Klingon out of range of phasers at " + distance + " sectors...");
+
+        }
+        _energy -= energyCost;
+    }
 
 
-    // note we made generator public in order to mock it
-    // it's ugly, but it's telling us something about our *design!* ;-)
-	public static Random generator = new Random();
-	private static int Rnd(int maximum) {
-		return generator.Next(maximum);
-	}
+
+   }
+
+    
 
 
-}
+   
+
+
+

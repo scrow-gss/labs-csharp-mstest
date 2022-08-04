@@ -41,7 +41,7 @@ public class PhaserPinningTests {
         game.FireWeapon(context);
         Assert.AreEqual("Klingon out of range of phasers at " + outOfRange + " sectors... || ",
             context.GetAllOutput());
-        Assert.AreEqual(EnergyInNewGame - 1000, game.EnergyRemaining());
+        Assert.AreEqual(EnergyInNewGame - 1000, game.GetEnergyRemaining());
     }
 
     [TestMethod]
@@ -53,7 +53,7 @@ public class PhaserPinningTests {
         game.FireWeapon(context);
         Assert.AreEqual("Phasers hit Klingon at 2000 sectors with 400 units || Klingon destroyed! || ",
             context.GetAllOutput());
-        Assert.AreEqual(EnergyInNewGame - 1000, game.EnergyRemaining());
+        Assert.AreEqual(EnergyInNewGame - 1000, game.GetEnergyRemaining());
         Assert.IsTrue(klingon.DeleteWasCalled());
     }
 
