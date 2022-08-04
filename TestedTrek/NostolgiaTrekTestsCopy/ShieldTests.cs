@@ -12,7 +12,7 @@ namespace NostaligaTrekTests
         {
             var shield = new Shields();
 
-            Assert.IsTrue(shield.IsUp());
+            Assert.IsTrue(shield.IsRaised());
         }
         
         [TestMethod]
@@ -22,7 +22,18 @@ namespace NostaligaTrekTests
             
             shield.Lower();
 
-            Assert.IsFalse(shield.IsUp());
+            Assert.IsFalse(shield.IsRaised());
+        }
+
+        [TestMethod]
+        public void ShieldsCanBeRaised()
+        {
+            var shield = new Shields();
+            
+            shield.Lower();
+            shield.Raise();
+
+            Assert.IsTrue(shield.IsRaised());
         }
 
     }

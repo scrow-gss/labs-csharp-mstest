@@ -7,9 +7,14 @@ namespace NostalgiaTrek
 {
     public class Shields
     {
-        private bool isRaised = true;
+        private bool isRaised;
 
-        public bool IsUp()
+        public Shields()
+        {
+            isRaised = true;
+        }
+
+        public bool IsRaised()
         {
             return isRaised;
         }
@@ -17,6 +22,11 @@ namespace NostalgiaTrek
         public void Lower()
         {
             isRaised = false;
+        }
+
+        public void Raise()
+        {
+            isRaised = true;
         }
     }
 }
