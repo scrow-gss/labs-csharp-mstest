@@ -53,6 +53,12 @@
       <Version>2.1.2</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NostalgiaTrek\NostalgiaTrek.csproj">
+      <Project>{2166b56b-fc1f-4c98-a0ae-fd371a5a114a}</Project>
+      <Name>NostalgiaTrek</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

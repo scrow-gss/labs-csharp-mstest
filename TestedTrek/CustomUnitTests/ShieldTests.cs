@@ -7,8 +7,11 @@ namespace CustomUnitTests
     public class ShieldTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ShieldsAreUpByDefault()
         {
+            var shield = new Shield();
+
+            Assert.IsTrue(shield.IsUp());
         }
     }
 }
