@@ -1,17 +1,16 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using NostalgiaTrek;
 
 namespace CustomUnitTests
 {
     [TestClass]
-    public class ShieldTests
+    public class ShipTests
     {
         [TestMethod]
-        public void ShieldsAreUpByDefault()
+        public void IsResting()
         {
-            //var shield = new Shield();
-
-            //Assert.IsTrue(shield.IsUp());
+            Assert.IsTrue(Ship.IsResting());
         }
     }
 }
