@@ -16,7 +16,7 @@ public class Game {
 
             _generator = value;
             random.setRandom(_generator);
-        }
+        } 
         get
         {
             return _generator;
