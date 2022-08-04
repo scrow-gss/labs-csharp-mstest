@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarTrekConsoleApp", "StarT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTests", "Tests\MSTests.csproj", "{9398B6B0-7194-42AD-9C20-4A7AEC4A5FBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomUnitTests", "CustomUnitTests\CustomUnitTests.csproj", "{36C5F998-B7EA-4779-BD74-1484DD15E696}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NostalgiaTrek", "NostalgiaTrek\NostalgiaTrek.csproj", "{2166B56B-FC1F-4C98-A0AE-FD371A5A114A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{9398B6B0-7194-42AD-9C20-4A7AEC4A5FBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9398B6B0-7194-42AD-9C20-4A7AEC4A5FBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9398B6B0-7194-42AD-9C20-4A7AEC4A5FBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36C5F998-B7EA-4779-BD74-1484DD15E696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36C5F998-B7EA-4779-BD74-1484DD15E696}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36C5F998-B7EA-4779-BD74-1484DD15E696}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36C5F998-B7EA-4779-BD74-1484DD15E696}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2166B56B-FC1F-4C98-A0AE-FD371A5A114A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2166B56B-FC1F-4C98-A0AE-FD371A5A114A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2166B56B-FC1F-4C98-A0AE-FD371A5A114A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2166B56B-FC1F-4C98-A0AE-FD371A5A114A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
