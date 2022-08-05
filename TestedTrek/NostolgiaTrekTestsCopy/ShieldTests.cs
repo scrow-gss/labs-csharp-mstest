@@ -34,7 +34,6 @@ namespace NostaligaTrekTests
         {            
             shield.Raise();
             shield.Lower();
-            
 
             Assert.IsFalse(shield.IsRaised);
         }
@@ -55,8 +54,8 @@ namespace NostaligaTrekTests
         [TestMethod]
         public void ChargeShieldsToMax()
         {
-            shield.ChargeShield(20000);
-            Assert.AreEqual(10000, shield.EnergyLevel);
+            shield.ChargeShield(20_000);
+            Assert.AreEqual(10_000, shield.EnergyLevel);
         }
         [TestMethod]
         public void ReduceShields()
@@ -70,8 +69,7 @@ namespace NostaligaTrekTests
         public void ReduceShieldsToMinimum()
         {
             shield.Raise();
-
-            shield.ReduceShield(12000);
+            shield.ReduceShield(12_000);
 
             Assert.AreEqual(0, shield.EnergyLevel);
         }
@@ -92,5 +90,7 @@ namespace NostaligaTrekTests
             
             Assert.IsFalse(shield.IsRaised);
         }
+
+      
     }
 }

@@ -7,11 +7,12 @@ namespace NostalgiaTrek
 {
     public class Shields
     {
-        private const int MAXENERGY = 10000;
-        private const int MINIMUMENERGY = 0;
-        private const int STARTINGENERGY = 8000;
+        public const int MAXENERGY = 10000;
+        public const int MINIMUMENERGY = 0;
+        public const int STARTINGENERGY = 8000;
         
         public bool IsRaised { get; private set; }
+        public int EnergyLevel { get; private set; }
 
         public Shields()
         {
@@ -28,8 +29,6 @@ namespace NostalgiaTrek
         {
             IsRaised = true;
         }
-
-        public int EnergyLevel { get; private set; }
 
         public void ChargeShield(int chargeAmount)
         {
